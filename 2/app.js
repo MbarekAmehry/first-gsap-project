@@ -22,21 +22,12 @@ $(document).ready(function () {
     });
   }
 
-  //   Zoom element on hover alongside with next ones
-
   var mX,
     mY,
     distance,
     $slides = $('.slide');
 
-  $slides.mouseenter(function () {
-    TweenMax.to($slides.not(this), 0.23, { scale: 1 });
-    TweenMax.to(this, 0.3, { scale: 1.52 });
-  });
-  $slides.mouseleave(function () {
-    TweenMax.to(this, 0.3, { scale: 1 });
-  });
-
+  // calc Distance between mouse and other elements
   function calculateDistance(elem, mouseX, mouseY) {
     return Math.floor(
       Math.sqrt(
@@ -45,6 +36,25 @@ $(document).ready(function () {
       )
     );
   }
+
+  // Zoom element on mou
+  $slides.mouseenter(function () {
+    TweenMax.to($slides.not(this), 0.23, { scale: 1 });
+    TweenMax.to(this, 0.3, { scale: 1.852 });
+
+    distance = calculateDistance($slides.not(this), mX, mY);
+    console.log(distance);
+    if (distance < 400) {
+      TweenMax.to($slides.not(this), 0.3, { scale: 1.45 });
+    } else {
+      TweenMax.to($slides.not(this), 0.3, { scale: 1 });
+    }
+  });
+
+  // Remove zoom on mouseLeave
+  $slides.mouseleave(function () {
+    TweenMax.to(this, 0.3, { scale: 1 });
+  });
 
   $(document).mousemove(function (e) {
     mX = e.pageX;
