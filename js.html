@@ -19,6 +19,7 @@
         }
 
         .img {
+            position: absolute;
             display: flex;
             justify-content: center;
             align-items: center;
@@ -33,72 +34,31 @@
         }
 
         .img.active {
-            border: 3px solid blue;
-            transition: .1s cubic-bezier(.645, .045, .355, 1);
-            transform: scale(1.5) !important;
-        }
-
-        .img-1 {
-            position: absolute;
-            top: 4%;
-            left: 11%;
-        }
-
-        .img-3 {
-            position: absolute;
-            top: 28%;
-            left: 38%;
-        }
-
-        .img-4 {
-            position: absolute;
-            top: 33%;
-            left: 18%;
-        }
-
-        .img-5 {
-            position: absolute;
-            top: 2%;
-            left: 70%;
-        }
-
-        .img-6 {
-            position: absolute;
-            top: 22%;
-            left: 88%;
-        }
-
-        .img-7 {
-            position: absolute;
-            top: 39%;
-            left: 68%;
+            /* border: 3px solid blue; */
+            transition: .3s cubic-bezier(.645, .045, .355, 1);
+            transform: scale(2.5) !important;
         }
     </style>
 </head>
 
 <body>
     <div id="container">
-        <img src="https://picsum.photos/110/160?random=29" alt="img-1" class="img img-1">
-        <img src="https://picsum.photos/100/130?random=37" alt="img-2" class="img img-2">
-        <img src="https://placebear.com/640/360" alt="img-3" class="img img-3">
-        <img src="https://picsum.photos/200?random=30" alt="img-4" class="img img-4">
-        <img src="https://picsum.photos/200?random=33" alt="img-5" class="img img-5">
-        <img src="https://picsum.photos/100/130?random=34" alt="img-6" class="img img-6">
-        <img src="https://picsum.photos/200?random=36" alt="img-7" class="img img-7">
     </div>
 
     <script>
-
-
-        // for (let index = 0; index < 50; index++) {
-        //     container.
-        //     <img src="https://picsum.photos/110/160?random=29" alt="img-1" class="img img-1">
-
-
-        // }
+        let container = document.getElementById('container');
+        for (let i = 0; i < 100; i++) {
+            let img = document.createElement("IMG");
+            img.src = "https://picsum.photos/110/160?random="+i;
+            img.classList.add('img');
+            img.style.position = "absolute";
+            img.style.left = Math.floor(Math.random()*100)+"%"; // generatePattern();
+            img.style.top = Math.floor(Math.random()*100)+"%"; // generatePattern();
+            container.appendChild(img);
+        }
         let imgs = document.getElementsByClassName('img');
         let handleMousemove = (e) => {
-            let range = 300;
+            let range = 100;
             for (let i = 0; i < imgs.length; i++) {
                 const img = imgs[i];
                 img.classList.remove('active');
