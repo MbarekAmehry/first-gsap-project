@@ -1,116 +1,74 @@
-* {
-    box-sizing:content-box;
-  }
-  
-  html{
-    height:100%; /* allows body tag to take full height */
-  
-  }
-  
+#container{
+  position: relative;
+  height: 150vh;
+  width: 100%;
+  border: solid 1px red;
+  display: flex;
+  justify-content: center;
+  align-items: start;
+  padding: 23px;
+}
 
-  .navbar-logo{
-    width: 16%;
-    
-  }
-  body {
-    margin:0 30px;
-    padding: 0;
-    height: 100%;
-    overflow: hidden;
-    background: rgb(255, 255, 255);
-    color:#FFF;
-  }
-  
-  
-  .landing-wrapper {
-    width: 100vw;
-    height: 100vh;
-    /* margin:20px auto; */
-    padding:0;
-    position: relative;
-    overflow:hidden;
-    /* border:1px solid #333; */
-    cursor:pointer;
-  }
-  
-  .landing-inner-content {
-    background-color: rgb(255, 255, 255);
-    width: 200vw;
-    height: 100vh;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    
-  }
-  
-  .slide {
-    width: ;
-    display: flex;
-    align-items: center;
-    justify-self: center;
-    font-size: 3rem;
-    color: blueviolet;
-    /* position: absolute; */
-    height: 380px;
-    width: 190px;
-    /* left: 50%; */
-    /* background: red; */
-    background-size: contain;
-    background-repeat: no-repeat;
-  }
+.slide{
+  /* transition:.3s cubic-bezier(.645,.045,.355,1); */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  left: 0;
+  top: 0;
+  /* height: 210px;
+  width: 150px; */
+  max-width: 140px;
+  margin: 15px;
+  background: mediumblue; 
+  color:white;
+  font-size: 2rem;
+}
+.slide.active {
+  border: 3px solid blue;
+  transition: .1s cubic-bezier(.645, .045, .355, 1);
+  transform: scale(1.5) !important;
+}
+/* .slide:hover{
+  transition:.3s cubic-bezier(.645,.045,.355,1);
+  transform: scale(1.5) !important;
+}
 
-  .slide:hover{
-    transform:    scale(1.45);
-  }
-  
-  .one {
-    /* position: absolute;
-    top: 75%;
-    left: 90%; */
-
-    background-image: url(https://upload.wikimedia.org/wikipedia/commons/3/35/Neckertal_20150527-6384.jpg);
-  
-
-  
-  }
-  
-  .two {
-    /* position: absolute;
-    height: 300px;
-    width: 500px;
-    left: 20%;
-    top: 20%; */
-    /*background: green;*/
-     background-image: url("https://images.unsplash.com/photo-1506744038136-46273834b3fb?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjExMDk0fQ&w=1000&q=80");
-  }
-  
-  .three {
-    /* left: 75%;
-    top: 40%;
-    width: 400px; */
-    background-image: url('https://blog.pshares.org/wp-content/uploads/sites/10/2014/08/abstract_paint.jpeg');
-  }
-  
-  .four {
-   
-    /* left: 50%;
-    top: 100px;
-    width: 300px; */
-    background-image: url(https://iso.500px.com/wp-content/uploads/2014/07/big-one.jpg);
-  }
-  
-  .five {
-  
-    /* left: 50%;
-    top: 400px;
-    width: 500px; */
-    /* margin: 100px; */
-    background-image: url(https://photographycourse.net/wp-content/uploads/2014/11/Landscape-Photography-steps.jpg);
-
-  }
+.beside {
+  transform: scale(1.15) !important;
+  transition:.3s cubic-bezier(.645,.045,.355,1);
+} */
 
 
-  .beside {
-    transform: scale(1.15);
-    
-  }
+.one {
+  position: absolute;
+  top: 4%;
+  left: 11%;
+}
+
+.three {
+  position: absolute;
+  top: 28%;
+  left: 38%;
+}
+.four {
+  position: absolute;
+  top: 33%;
+  left: 18%;
+}
+.five {
+  position: absolute;
+  top: 2%;
+  left: 70%;
+}
+.six {
+  position: absolute;
+  top: 22%;
+  left: 88%;
+}
+.seven {
+  position: absolute;
+  top: 39%;
+  left: 68%;
+}
