@@ -42,33 +42,32 @@ $(document).ready(function () {
   }
 
   // Zoom element on mou
-  $slides.mouseenter(function () {
-    TweenMax.to($slides.not(this), 0.23, { scale: 1 });
-    TweenMax.to(this, 0.3, { scale: 1.852 });
+  // $slides.mouseenter(function () {
+  //   TweenMax.to($slides.not(this), 0.23, { scale: 1 });
+  //   TweenMax.to(this, 0.3, { scale: 1.852 });
 
-    distance = calculateDistance($slides.not(this), mX, mY);
-    console.log(distance);
-    if (distance < 400) {
-      TweenMax.to($slides.not(this), 0.3, { scale: 1.45 });
-    } else {
-      TweenMax.to($slides.not(this), 0.3, { scale: 1 });
-    }
-  });
+  //   distance = calculateDistance($slides.not(this), mX, mY);
+  //   console.log(distance);
+  //   if (distance < 400) {
+  //   } else {
+  //     TweenMax.to($slides.not(this), 0.3, { scale: 1 });
+  //   }
+  // });
 
   // Remove zoom on mouseLeave
-  $slides.mouseleave(function () {
-    TweenMax.to(this, 0.3, { scale: 1 });
-  });
+  // $slides.mouseleave(function () {
+  //   TweenMax.to(this, 0.3, { scale: 1 });
+  // });
 
-  $(document).mousemove(function (e) {
-    mX = e.pageX;
-    mY = e.pageY;
-    distance = calculateDistance($slides, mX, mY);
-    console.log(distance);
-    if (distance < 800) {
-      // $slides.addClass('beside');
-    }
-  });
+  // $(document).mousemove(function (e) {
+  //   mX = e.pageX;
+  //   mY = e.pageY;
+  //   distance = calculateDistance($slides, mX, mY);
+  //   console.log(distance);
+  //   if (distance < 800) {
+  //     // $slides.addClass('beside');
+  //   }
+  // });
 
   // $('.slide').on('mouseenter', function () {
   //   $(this).prev().addClass('beside');
@@ -86,12 +85,19 @@ $(document).ready(function () {
   let handleMousemove = (e) => {
     let range = 0;
     for (let i = 0; i < imgs.length; i++) {
-        const img = imgs[i];
-        img.classList.remove('active');
-        if (img.offsetLeft + img.offsetWidth >= e.x - range && img.offsetLeft <= e.x + range
-            && img.offsetTop + img.offsetHeight >= e.y - range && img.offsetTop <= e.y + range) {
-            img.classList.add('active');
-        }
+      const img = imgs[i];
+      img.classList.remove('active');
+      if (
+        img.offsetLeft + img.offsetWidth >= e.x - range &&
+        img.offsetLeft <= e.x + range &&
+        img.offsetTop + img.offsetHeight >= e.y - range &&
+        img.offsetTop <= e.y + range
+      ) {
+        // img.classList.add('active');
+        TweenMax.to(img, 0.3, { scale: 1.6 });
+      } else {
+        TweenMax.to(img, 0.3, { scale: 1 });
+      }
     }
 };
 
@@ -102,7 +108,5 @@ for (let i = 0; i < imgs.length; i++) {
   img.addEventListener('mouseleave', handleMousemove);
 
 }
-
-
 
 });
