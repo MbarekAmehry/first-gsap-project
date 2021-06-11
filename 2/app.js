@@ -27,6 +27,10 @@ $(document).ready(function () {
     distance,
     $slides = $('.slide');
 
+  $slides.click(function () {
+    $(location).attr('href', 'slider.html');
+  });
+
   // calc Distance between mouse and other elements
   function calculateDistance(elem, mouseX, mouseY) {
     return Math.floor(
