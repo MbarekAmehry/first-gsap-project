@@ -25,6 +25,11 @@
   color:white;
   font-size: 2rem;
 }
+.slide.active {
+  border: 3px solid blue;
+  transition: .1s cubic-bezier(.645, .045, .355, 1);
+  transform: scale(1.5) !important;
+}
 /* .slide:hover{
   transition:.3s cubic-bezier(.645,.045,.355,1);
   transform: scale(1.5) !important;

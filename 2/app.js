@@ -80,4 +80,22 @@ $(document).ready(function () {
   // });
 
   //
+
+
+  let handleMousemove = (e) => {
+    let imgs = document.getElementsByClassName('slide');
+    let range = 300;
+    for (let i = 0; i < imgs.length; i++) {
+        const img = imgs[i];
+        img.classList.remove('active');
+        if (img.offsetLeft + img.offsetWidth >= e.x - range && img.offsetLeft <= e.x + range
+            && img.offsetTop + img.offsetHeight >= e.y - range && img.offsetTop <= e.y + range) {
+            img.classList.add('active');
+        }
+    }
+};
+
+document.addEventListener('mousemove', handleMousemove);
+
+
 });
