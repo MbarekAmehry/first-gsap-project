@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vanila JS</title>
+    <style>
+        #container {
+            position: relative;
+            height: 150vh;
+            width: 100%;
+            border: solid 1px red;
+            display: flex;
+            justify-content: center;
+            align-items: start;
+            padding: 23px;
+        }
+
+        .img {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            position: relative;
+            left: 0;
+            top: 0;
+            max-width: 140px;
+            margin: 15px;
+            background: mediumblue;
+            color: white;
+            font-size: 2rem;
+        }
+
+        .img.active {
+            border: 3px solid blue;
+            transition: .1s cubic-bezier(.645, .045, .355, 1);
+            transform: scale(1.5) !important;
+        }
+
+        .img-1 {
+            position: absolute;
+            top: 4%;
+            left: 11%;
+        }
+
+        .img-3 {
+            position: absolute;
+            top: 28%;
+            left: 38%;
+        }
+
+        .img-4 {
+            position: absolute;
+            top: 33%;
+            left: 18%;
+        }
+
+        .img-5 {
+            position: absolute;
+            top: 2%;
+            left: 70%;
+        }
+
+        .img-6 {
+            position: absolute;
+            top: 22%;
+            left: 88%;
+        }
+
+        .img-7 {
+            position: absolute;
+            top: 39%;
+            left: 68%;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="container">
+        <img src="https://picsum.photos/110/160?random=29" alt="img-1" class="img img-1">
+        <img src="https://picsum.photos/100/130?random=37" alt="img-2" class="img img-2">
+        <img src="https://placebear.com/640/360" alt="img-3" class="img img-3">
+        <img src="https://picsum.photos/200?random=30" alt="img-4" class="img img-4">
+        <img src="https://picsum.photos/200?random=33" alt="img-5" class="img img-5">
+        <img src="https://picsum.photos/100/130?random=34" alt="img-6" class="img img-6">
+        <img src="https://picsum.photos/200?random=36" alt="img-7" class="img img-7">
+    </div>
+
+    <script>
+
+
+        // for (let index = 0; index < 50; index++) {
+        //     container.
+        //     <img src="https://picsum.photos/110/160?random=29" alt="img-1" class="img img-1">
+
+
+        // }
+        let imgs = document.getElementsByClassName('img');
+        let handleMousemove = (e) => {
+            let range = 300;
+            for (let i = 0; i < imgs.length; i++) {
+                const img = imgs[i];
+                img.classList.remove('active');
+                if (img.offsetLeft + img.offsetWidth >= e.x - range && img.offsetLeft <= e.x + range
+                    && img.offsetTop + img.offsetHeight >= e.y - range && img.offsetTop <= e.y + range) {
+                    img.classList.add('active');
+                }
+            }
+        };
+
+        let handleMouseleave = (e) => {
+            for (let i = 0; i < imgs.length; i++) {
+                const img = imgs[i];
+                img.classList.remove('active');
+            }
+        };
+        
+        for (let i = 0; i < imgs.length; i++) {
+            const img = imgs[i];
+            img.addEventListener('mouseenter', handleMousemove);
+            img.addEventListener('mouseleave', handleMouseleave);
+        }
+
+    </script>
+</body>
+
+</html>

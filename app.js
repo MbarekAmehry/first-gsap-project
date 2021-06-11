@@ -105,7 +105,7 @@ $(document).ready(function () {
 for (let i = 0; i < imgs.length; i++) {
   const img = imgs[i];
   img.addEventListener('mouseenter', handleMousemove);
-  img.addEventListener('mouseleave', handleMousemove);
+  // img.addEventListener('mouseleave', handleMousemove);
 
 }
 
