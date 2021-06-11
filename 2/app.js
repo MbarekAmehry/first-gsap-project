@@ -82,9 +82,9 @@ $(document).ready(function () {
   //
 
 
+  let imgs = document.getElementsByClassName('slide');
   let handleMousemove = (e) => {
-    let imgs = document.getElementsByClassName('slide');
-    let range = 300;
+    let range = 0;
     for (let i = 0; i < imgs.length; i++) {
         const img = imgs[i];
         img.classList.remove('active');
@@ -95,7 +95,14 @@ $(document).ready(function () {
     }
 };
 
-document.addEventListener('mousemove', handleMousemove);
+
+for (let i = 0; i < imgs.length; i++) {
+  const img = imgs[i];
+  img.addEventListener('mouseenter', handleMousemove);
+  img.addEventListener('mouseleave', handleMousemove);
+
+}
+
 
 
 });
