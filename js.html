@@ -65,7 +65,7 @@
             for (let i = 0; i < imgs.length; i++) {
                 const img = imgs[i];
                 // img.classList.remove('active');
-                TweenMax.to(img, 0.2, { scale: 1 });
+                // TweenMax.to(img, 0.2, { scale: 1 });
 
                 if (img.offsetLeft + img.offsetWidth >= e.x - range && img.offsetLeft <= e.x + range
                     && img.offsetTop + img.offsetHeight >= e.y - range && img.offsetTop <= e.y + range) {
@@ -90,11 +90,13 @@
             console.log('after');
             console.table(closest);
 
-           for (let i = 1; i <= closest.length; i++) {
-               const img = closest[i][0];
-               img.style.zIndex = i*10;
-               TweenMax.to(img, 0.2, { scale: i*1 });
+           for (let i = 0; i < closest.length; i++) {
+               let n = i+1;
+               const img = closest[i];
+               img[0].style.zIndex = n*1;
+               TweenMax.to(img[0], 0.2, { scale: n/10*1+1 });
            }
+
 
          
         };
@@ -102,7 +104,9 @@
         let handleMouseleave = (e) => {
             for (let i = 0; i < imgs.length; i++) {
                 const img = imgs[i];
-                img.classList.remove('active');
+                img.style.zIndex = 0;
+                TweenMax.to(img, 0.2, { scale: 1 });
+
             }
         };
 
