@@ -5,6 +5,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/1.18.0/TweenMax.min.js"></script>
     <title>Vanila JS</title>
     <style>
         #container {
@@ -34,7 +35,7 @@
         }
 
         .img.active {
-            /* border: 3px solid blue; */
+            border: 3px solid blue;
             transition: .3s cubic-bezier(.645, .045, .355, 1);
             transform: scale(2.5) !important;
         }
@@ -49,24 +50,53 @@
         let container = document.getElementById('container');
         for (let i = 0; i < 100; i++) {
             let img = document.createElement("IMG");
-            img.src = "https://picsum.photos/110/160?random="+i;
+            img.src = "https://picsum.photos/110/160?random=" + i;
             img.classList.add('img');
             img.style.position = "absolute";
-            img.style.left = Math.floor(Math.random()*100)+"%"; // generatePattern();
-            img.style.top = Math.floor(Math.random()*100)+"%"; // generatePattern();
+            img.style.left = Math.floor(Math.random() * 100) + "%"; // generatePattern();
+            img.style.top = Math.floor(Math.random() * 100) + "%"; // generatePattern();
             container.appendChild(img);
         }
         let imgs = document.getElementsByClassName('img');
         let handleMousemove = (e) => {
             let range = 100;
+            let closest = [];
+
             for (let i = 0; i < imgs.length; i++) {
                 const img = imgs[i];
-                img.classList.remove('active');
+                // img.classList.remove('active');
+                TweenMax.to(img, 0.2, { scale: 1 });
+
                 if (img.offsetLeft + img.offsetWidth >= e.x - range && img.offsetLeft <= e.x + range
                     && img.offsetTop + img.offsetHeight >= e.y - range && img.offsetTop <= e.y + range) {
-                    img.classList.add('active');
+                    // img.classList.add('active');
+                    if (img.offsetLeft + img.offsetWidth >= e.x - range) {
+                        closest.push([img, e.x - img.offsetLeft + img.offsetWidth]);
+                    } else if (img.offsetLeft <= e.x + range) {
+                        closest.push([img, e.x - img.offsetLeft]);
+                    } else if (img.offsetTop + img.offsetHeight >= e.y - range) {
+                        closest.push([img, e.y - img.offsetTop + img.offsetHeight]);
+                    } else {
+                        closest.push([img, e.y - img.offsetTop]);
+                    }
                 }
             }
+
+            console.log('before');
+            console.table(closest);
+            closest.sort(function (a, b) {
+                return a[1] - b[1];
+            });
+            console.log('after');
+            console.table(closest);
+
+           for (let i = 1; i <= closest.length; i++) {
+               const img = closest[i][0];
+               img.style.zIndex = i*10;
+               TweenMax.to(img, 0.2, { scale: i*1 });
+           }
+
+         
         };
 
         let handleMouseleave = (e) => {
@@ -75,12 +105,15 @@
                 img.classList.remove('active');
             }
         };
-        
+
         for (let i = 0; i < imgs.length; i++) {
             const img = imgs[i];
             img.addEventListener('mouseenter', handleMousemove);
             img.addEventListener('mouseleave', handleMouseleave);
         }
+
+
+
 
     </script>
 </body>
