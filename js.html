@@ -48,7 +48,7 @@
 
     <script>
         let container = document.getElementById('container');
-        for (let i = 0; i < 100; i++) {
+        for (let i = 0; i < 50; i++) {
             let img = document.createElement("IMG");
             img.src = "https://picsum.photos/110/160?random=" + i;
             img.classList.add('img');
@@ -67,6 +67,9 @@
                 // img.classList.remove('active');
                 // TweenMax.to(img, 0.2, { scale: 1 });
 
+                img.style.zIndex = 0;
+                TweenMax.to(img, 0.2, { scale: 1 });
+
                 if (img.offsetLeft + img.offsetWidth >= e.x - range && img.offsetLeft <= e.x + range
                     && img.offsetTop + img.offsetHeight >= e.y - range && img.offsetTop <= e.y + range) {
                     // img.classList.add('active');
@@ -82,39 +85,42 @@
                 }
             }
 
-            console.log('before');
-            console.table(closest);
+            // console.log('before');
+            // console.table(closest);
             closest.sort(function (a, b) {
                 return a[1] - b[1];
             });
-            console.log('after');
-            console.table(closest);
+            // console.log('after');
+            // console.table(closest);
 
-           for (let i = 0; i < closest.length; i++) {
-               let n = i+1;
-               const img = closest[i];
-               img[0].style.zIndex = n*1;
-               TweenMax.to(img[0], 0.2, { scale: n/10*1+1 });
-           }
-
-
-         
-        };
-
-        let handleMouseleave = (e) => {
-            for (let i = 0; i < imgs.length; i++) {
-                const img = imgs[i];
-                img.style.zIndex = 0;
-                TweenMax.to(img, 0.2, { scale: 1 });
-
+            for (let i = 0; i < closest.length; i++) {
+                let n = i + 1;
+                const img = closest[i][0];
+                img.style.zIndex = n * 1;
+                TweenMax.to(img, 0.2, { scale: n / 10 * 1 + 1 });
             }
+
+
+
         };
 
-        for (let i = 0; i < imgs.length; i++) {
-            const img = imgs[i];
-            img.addEventListener('mouseenter', handleMousemove);
-            img.addEventListener('mouseleave', handleMouseleave);
-        }
+        // let handleMouseleave = (e) => {
+        //     for (let i = 0; i < imgs.length; i++) {
+        //         const img = imgs[i][0];
+        //         img.style.zIndex = 0;
+        //         TweenMax.to(img, 0.2, { scale: 1 });
+
+        //     }
+        // };
+
+        // for (let i = 0; i < imgs.length; i++) {
+        //     const img = imgs[i];
+        //     img.addEventListener('mouseenter', handleMousemove);
+        //     img.addEventListener('mouseleave', handleMouseleave);
+        // }
+
+        document.addEventListener('mousemove', handleMousemove);
+        // document.addEventListener('mouseleave', handleMouseleave);
 
 
 
