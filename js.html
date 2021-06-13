@@ -8,13 +8,14 @@
     <title>davidwilliambaum.com gallery replicate in vanilla javascript no canvas. challenge</title>
     <meta name="description" content="challenge accepted! to create same davidwilliambaum.com galley with pure javascript instead of using canvas">
     <style>
+        html {
+            cursor: crosshair;
+        }
+
         body {
             margin: 0;
             padding: 0;
             overflow: hidden;
-        }
-        .img-link {
-            cursor: crosshair;
         }
     </style>
 </head>
@@ -28,7 +29,7 @@
         let myImgs = [];
 
         let categories = ['Web Devlopment', 'Mobile Devlopment', 'Web Design', 'Automiation', 'Graphic Design', "Videography"]
-        for (let i = 0; i < 50; i++) {
+        for (let i = 0; i < 10; i++) {
             myImgs.push({ id: i + 1, img: "https://picsum.photos/200?random=" + i, category: categories[Math.floor(Math.random() * categories.length)] })
         }
 
