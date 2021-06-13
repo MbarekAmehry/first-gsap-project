@@ -80,14 +80,14 @@
             }
 
             closest.sort(function (a, b) {
-                return a[1] - b[1];
+                return b[1] - a[1];
             });
 
             for (let i = 0; i < closest.length; i++) {
                 let n = i + 1;
                 const img = closest[i][0];
                 img.style.zIndex = n * 1;
-                TweenMax.to(img, 0.2, { scale: n / 10 * 1 + 1 });
+                TweenMax.to(img, 0.2, { scale: n / 10 + 1 });
             }
         };
 
@@ -98,7 +98,7 @@
         }
 
         function callParallax(e) {
-            parallaxIt(e, '.img-link', -190);
+            parallaxIt(e, '.img-link', -200);
         }
 
         function parallaxIt(e, target, movement) {
