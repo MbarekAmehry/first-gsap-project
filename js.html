@@ -6,16 +6,23 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>davidwilliambaum.com gallery replicate in vanilla javascript no canvas. challenge</title>
-    <meta name="description" content="challenge accepted! to create same davidwilliambaum.com galley with pure javascript instead of using canvas">
+    <meta name="description"
+        content="challenge accepted! to create same davidwilliambaum.com galley with pure javascript instead of using canvas">
     <style>
-        html, .img-link {
-            cursor: crosshair;
+        html,
+        .img-link {
+            cursor: crosshair
         }
 
         body {
             margin: 0;
             padding: 0;
-            overflow: hidden;
+            overflow: hidden
+        }
+
+        #container {
+            width: 100vh;
+            height: 100vh
         }
     </style>
 </head>
@@ -23,6 +30,9 @@
 <body>
     <div id="container">
     </div>
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+        integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+        crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/1.18.0/TweenMax.min.js"></script>
     <script>
         let container = document.getElementById('container');
@@ -33,7 +43,6 @@
             myImgs.push({ id: i + 1, img: "https://picsum.photos/200?random=" + i, category: categories[Math.floor(Math.random() * categories.length)] })
         }
 
-        console.table(myImgs);
         for (let i = 0; i < myImgs.length; i++) {
             let a = document.createElement("A");
             a.classList.add('img-link')
@@ -48,11 +57,14 @@
             container.appendChild(a);
         }
         let imgs = document.getElementsByClassName('img-link');
+        let timeout;
         let handleMousemove = (e) => {
             let range = 5;
             let closest = [];
 
             for (let i = 0; i < imgs.length; i++) {
+                if (timeout) clearTimeout(timeout);
+                setTimeout(callParallax.bind(null, e), 200);
                 const img = imgs[i];
                 img.style.zIndex = 0;
                 TweenMax.to(img, 0.2, { scale: 1 });
@@ -70,13 +82,9 @@
                 }
             }
 
-            // console.log('before');
-            // console.table(closest);
             closest.sort(function (a, b) {
                 return a[1] - b[1];
             });
-            // console.log('after');
-            // console.table(closest);
 
             for (let i = 0; i < closest.length; i++) {
                 let n = i + 1;
@@ -86,10 +94,25 @@
             }
         };
 
-        document.addEventListener('mousemove', handleMousemove);
+        container.addEventListener('mousemove', handleMousemove);
 
         function generatePattern(r) {
             return (Math.floor(Math.random() * 60) + 20) + "%";
+        }
+
+        function callParallax(e) {
+            parallaxIt(e, '.img-link', -190);
+        }
+
+        function parallaxIt(e, target, movement) {
+            var relX = e.pageX - container.offsetLeft;
+            var relY = e.pageY - container.offsetTop;
+
+            TweenMax.to(target, 1, {
+                x: ((relX - container.offsetWidth / 2) / container.offsetWidth) * movement,
+                y: ((relY - container.offsetHeight / 2) / container.offsetHeight) * movement,
+                ease: Power2.easeOut,
+            });
         }
 
         function slug(t) {
@@ -98,7 +121,6 @@
                 .replace(/[^\w ]+/g, '')
                 .replace(/ +/g, '-');
         }
-
     </script>
 </body>
 
