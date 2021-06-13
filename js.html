@@ -5,39 +5,16 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/1.18.0/TweenMax.min.js"></script>
-    <title>Vanila JS</title>
+    <title>davidwilliambaum.com gallery replicate in vanilla javascript no canvas. challenge</title>
+    <meta name="description" content="challenge accepted! to create same davidwilliambaum.com galley with pure javascript instead of using canvas">
     <style>
-        #container {
-            position: relative;
-            height: 150vh;
-            width: 100%;
-            border: solid 1px red;
-            display: flex;
-            justify-content: center;
-            align-items: start;
-            padding: 23px;
+        body {
+            margin: 0;
+            padding: 0;
+            overflow: hidden;
         }
-
-        .img {
-            position: absolute;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            position: relative;
-            left: 0;
-            top: 0;
-            max-width: 140px;
-            margin: 15px;
-            background: mediumblue;
-            color: white;
-            font-size: 2rem;
-        }
-
-        .img.active {
-            border: 3px solid blue;
-            transition: .3s cubic-bezier(.645, .045, .355, 1);
-            transform: scale(2.5) !important;
+        .img-link {
+            cursor: crosshair;
         }
     </style>
 </head>
@@ -45,34 +22,41 @@
 <body>
     <div id="container">
     </div>
-
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/1.18.0/TweenMax.min.js"></script>
     <script>
         let container = document.getElementById('container');
+        let myImgs = [];
+
+        let categories = ['Web Devlopment', 'Mobile Devlopment', 'Web Design', 'Automiation', 'Graphic Design', "Videography"]
         for (let i = 0; i < 50; i++) {
-            let img = document.createElement("IMG");
-            img.src = "https://picsum.photos/110/160?random=" + i;
-            img.classList.add('img');
-            img.style.position = "absolute";
-            img.style.left = Math.floor(Math.random() * 100) + "%"; // generatePattern();
-            img.style.top = Math.floor(Math.random() * 100) + "%"; // generatePattern();
-            container.appendChild(img);
+            myImgs.push({ id: i + 1, img: "https://picsum.photos/200?random=" + i, category: categories[Math.floor(Math.random() * categories.length)] })
         }
-        let imgs = document.getElementsByClassName('img');
+
+        console.table(myImgs);
+        for (let i = 0; i < myImgs.length; i++) {
+            let a = document.createElement("A");
+            a.classList.add('img-link')
+            a.title = myImgs[i].category;
+            a.href = 'category/' + slug(myImgs[i].category);
+            let img = document.createElement("IMG");
+            img.src = myImgs[i].img;
+            a.style.position = "absolute";
+            a.style.left = generatePattern();
+            a.style.top = generatePattern();
+            a.appendChild(img);
+            container.appendChild(a);
+        }
+        let imgs = document.getElementsByClassName('img-link');
         let handleMousemove = (e) => {
             let range = 100;
             let closest = [];
 
             for (let i = 0; i < imgs.length; i++) {
                 const img = imgs[i];
-                // img.classList.remove('active');
-                // TweenMax.to(img, 0.2, { scale: 1 });
-
                 img.style.zIndex = 0;
                 TweenMax.to(img, 0.2, { scale: 1 });
-
                 if (img.offsetLeft + img.offsetWidth >= e.x - range && img.offsetLeft <= e.x + range
                     && img.offsetTop + img.offsetHeight >= e.y - range && img.offsetTop <= e.y + range) {
-                    // img.classList.add('active');
                     if (img.offsetLeft + img.offsetWidth >= e.x - range) {
                         closest.push([img, e.x - img.offsetLeft + img.offsetWidth]);
                     } else if (img.offsetLeft <= e.x + range) {
@@ -99,31 +83,20 @@
                 img.style.zIndex = n * 1;
                 TweenMax.to(img, 0.2, { scale: n / 10 * 1 + 1 });
             }
-
-
-
         };
 
-        // let handleMouseleave = (e) => {
-        //     for (let i = 0; i < imgs.length; i++) {
-        //         const img = imgs[i][0];
-        //         img.style.zIndex = 0;
-        //         TweenMax.to(img, 0.2, { scale: 1 });
-
-        //     }
-        // };
-
-        // for (let i = 0; i < imgs.length; i++) {
-        //     const img = imgs[i];
-        //     img.addEventListener('mouseenter', handleMousemove);
-        //     img.addEventListener('mouseleave', handleMouseleave);
-        // }
-
         document.addEventListener('mousemove', handleMousemove);
-        // document.addEventListener('mouseleave', handleMouseleave);
 
+        function generatePattern(r) {
+            return (Math.floor(Math.random() * 60) + 20) + "%";
+        }
 
-
+        function slug(t) {
+            return t
+                .toLowerCase()
+                .replace(/[^\w ]+/g, '')
+                .replace(/ +/g, '-');
+        }
 
     </script>
 </body>
