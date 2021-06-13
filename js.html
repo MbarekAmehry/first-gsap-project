@@ -36,7 +36,7 @@
         let myImgs = [];
 
         let categories = ['Web Devlopment', 'Mobile Devlopment', 'Web Design', 'Automiation', 'Graphic Design', "Videography"]
-        for (let i = 0; i < 10; i++) {
+        for (let i = 0; i < 20; i++) {
             myImgs.push({ id: i + 1, img: "https://picsum.photos/200?random=" + i, category: categories[Math.floor(Math.random() * categories.length)] })
         }
 
@@ -70,11 +70,11 @@
                     if (img.offsetLeft + img.offsetWidth >= e.x - range) {
                         closest.push([img, e.x - img.offsetLeft + img.offsetWidth]);
                     } else if (img.offsetLeft <= e.x + range) {
-                        closest.push([img, e.x - img.offsetLeft]);
+                        closest.push([img, img.offsetLeft - e.x]);
                     } else if (img.offsetTop + img.offsetHeight >= e.y - range) {
                         closest.push([img, e.y - img.offsetTop + img.offsetHeight]);
                     } else {
-                        closest.push([img, e.y - img.offsetTop]);
+                        closest.push([img, img.offsetTop - e.y]);
                     }
                 }
             }
@@ -94,7 +94,7 @@
         container.addEventListener('mousemove', handleMousemove);
 
         function generatePattern(r) {
-            return (Math.floor(Math.random() * 60) + 20) + "%";
+            return (Math.floor(Math.random() * 100)) + "%";
         }
 
         function callParallax(e) {
