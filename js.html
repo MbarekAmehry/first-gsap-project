@@ -58,10 +58,9 @@
         let handleMousemove = (e) => {
             let range = 5;
             let closest = [];
-
+            if (timeout) clearTimeout(timeout);
+            setTimeout(callParallax.bind(null, e), 200);
             for (let i = 0; i < imgs.length; i++) {
-                if (timeout) clearTimeout(timeout);
-                setTimeout(callParallax.bind(null, e), 200);
                 const img = imgs[i];
                 img.style.zIndex = 0;
                 TweenMax.to(img, 0.2, { scale: 1 });
