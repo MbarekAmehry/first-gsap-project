@@ -33,21 +33,80 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/1.18.0/TweenMax.min.js"></script>
     <script>
         let container = document.getElementById('container');
-        let myImgs = [];
+        // let myImgs = [];
+        var images = [
+            {
+                id: 1,
+                src: 'com.png',
+                category: 'Ecommerce',
+            },
+            {
+                id: 2,
+                src: 'community-manager-.png',
+                category: 'Mnagement',
+            },
+            {
+                id: 3,
+                src: 'CONSEIL-&-STRATÉGIE-DIGITAL.png',
+                category: 'Marketing',
+            },
+            {
+                id: 4,
+                src: 'DEV-mobile.png',
+                category: 'Mobile Devlopment',
+            },
+            {
+                id: 5,
+                src: 'dev-web-.png',
+                category: 'Web Devlopment',
+            },
+            {
+                id: 6,
+                src: 'emailing.png',
+                category: 'Marketing',
+            },
+            {
+                id: 7,
+                src: 'marketing-digital.png',
+                category: 'Marketing',
+            },
+            {
+                id: 8,
+                src: 'motion-graphic.png',
+                category: 'Videography',
+            },
+            {
+                id: 9,
+                src: 'shooting.png',
+                category: 'Photography',
+            },
+            {
+                id: 10,
+                src: 'social-video.png',
+                category: 'Marketing',
+            },
+            {
+                id: 11,
+                src: 'web-audite.png',
+                category: 'Marketing',
+            },
+        ];
 
-        let categories = ['Web Devlopment', 'Mobile Devlopment', 'Web Design', 'Automiation', 'Graphic Design', "Videography"]
-        for (let i = 0; i < 20; i++) {
-            myImgs.push({ id: i + 1, img: "https://picsum.photos/200?random=" + i, category: categories[Math.floor(Math.random() * categories.length)] })
-        }
+        // let categories = ['Web Devlopment', 'Mobile Devlopment', 'Web Design', 'Automiation', 'Graphic Design', "Videography"]
+        // for (let i = 0; i < 20; i++) {
+        //     myImgs.push({ id: i + 1, img: "https://picsum.photos/200?random=" + i, category: categories[Math.floor(Math.random() * categories.length)] })
+        // }
 
-        for (let i = 0; i < myImgs.length; i++) {
-            let a = document.createElement("A");
+        for (let i = 0; i < images.length; i++) {
+            let a = document.createElement("a");
             a.classList.add('img-link')
-            a.title = myImgs[i].category;
-            a.href = 'category/' + slug(myImgs[i].category);
+            a.title = images[i].category;
+            a.href = 'category/' + slug(images[i].category);
             let img = document.createElement("IMG");
-            img.src = myImgs[i].img;
+            img.src = `img/${images[i].src}`;
             a.style.position = "absolute";
+            img.style.width = "170px";
+            img.style.height = "210px";
             a.style.left = generatePattern();
             a.style.top = generatePattern();
             a.appendChild(img);
